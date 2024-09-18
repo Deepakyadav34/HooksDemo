@@ -1,5 +1,15 @@
-import React from 'react';
-import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import React, { createContext, useContext, useState } from "react";
+
+const ThemeContext = createContext();
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+const useTheme = () => useContext(ThemeContext);
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
@@ -7,11 +17,11 @@ const ThemeSwitcher = () => {
     <div>
       <h2>useContext Demo</h2>
       <p>Current Theme: {theme}</p>
-      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
         Toggle Theme
       </button>
-      <hr/>
-      <hr/>
+      <hr />
+      <hr />
     </div>
   );
 };
