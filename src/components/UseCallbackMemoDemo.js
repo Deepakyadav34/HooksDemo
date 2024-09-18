@@ -1,32 +1,22 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-const ComputeExpensiveValue = ({ count }) => {
-  const compute = (num) => {
-    let result = 0;
-    for (let i = 0; i < 1e6; i++) result += num;
-    return result;
-  };
+const ChildComponent= React.memo(({ onClick }) => {
+  console.log('Child component rendered');
+  return <button onClick={onClick}>Click me!</button>;
+});
 
-  const result = useMemo(() => compute(count), [count]);
+const UseCallbackMemoDemo=()=>{
+const [count,setCount]=useState(0);
 
-  return <p>Computed Value: {result}</p>;
-};
+const handleClick=useCallback(()=>{
+  setCount((prevcount)=> prevcount+1);
+},[]);
 
-const UseCallbackMemoDemo = () => {
-  const [count, setCount] = useState(0);
-  const [show, setShow] = useState(true);
-
-  const increment = useCallback(() => setCount(c => c + 1), []);
-  const toggleShow = useCallback(() => setShow(s => !s), []);
-
-  return (
-    <div>
-      <h2>useCallback and useMemo Demo</h2>
-      <button onClick={increment}>Increment Count</button>
-      <button onClick={toggleShow}>{show ? 'Hide' : 'Show'} Computed Value</button>
-      {show && <ComputeExpensiveValue count={count} />}
-    </div>
-  );
-};
-
+return(
+  <div>
+    <h1>Count:{count}</h1>
+    <ChildComponent onClick={handleClick}></ChildComponent>
+  </div>
+)
+}
 export default UseCallbackMemoDemo;
