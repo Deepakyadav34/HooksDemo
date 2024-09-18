@@ -11,10 +11,12 @@ const UseRefDemo = () => {
    },[state]
   )
   return <div>
+    <h2>Use Ref Demo</h2>
     <h2>Hello {state}</h2>
     <input type="text" value={state} onChange={(e)=>{setState(e.target.value)}} ></input>
     <h2>Render Count: {count.current}</h2>
-  
+  <hr></hr>
+  <hr></hr>
   </div>;
 };
 

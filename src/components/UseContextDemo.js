@@ -10,10 +10,11 @@ const ThemeSwitcher = () => {
       <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
         Toggle Theme
       </button>
+      <hr/>
+      <hr/>
     </div>
   );
 };
-
 const UseContextDemo = () => (
   <ThemeProvider>
     <ThemeSwitcher />
